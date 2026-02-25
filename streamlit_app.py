@@ -22,13 +22,17 @@ def crear_plantilla():
         "SEDE DE ESTUDIO",
         "MODALIDAD",
         "ASISTENCIA",
+        "FECHA DE EXAMEN",
+        "COMUNICACIÓN",
         "COMUNICACIÓN %",
+        "HABILIDADES COMUNICATIVAS",
         "HABILIDADES COMUNICATIVAS %",
+        "MATEMÁTICA",
         "MATEMÁTICA %",
+        "CIENCIA, TECNOLOGÍA Y AMBIENTE",
         "CIENCIA, TECNOLOGÍA Y AMBIENTE %",
         "TOTAL",
-        "TOTAL %",
-        "FECHA DE EXAMEN"
+        "TOTAL %"
     ]
     return pd.DataFrame(columns=columnas)
 
