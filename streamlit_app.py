@@ -9,6 +9,46 @@ st.set_page_config(page_title="Resultados Examen de Admisión", layout="wide")
 st.title("📊 Resultados del Examen de Admisión")
 st.write("Sube tu archivo Excel con los datos de los estudiantes para procesar el informe de nivelación e ingresantes.")
 
+# Función para crear plantilla
+def crear_plantilla():
+    """Crea un DataFrame con los encabezados necesarios para la plantilla."""
+    columnas = [
+        "CODIGO DE ESTUDIANTE",
+        "APELLIDOS",
+        "NOMBRES",
+        "DNI",
+        "AREA",
+        "CARRERA",
+        "SEDE DE ESTUDIO",
+        "MODALIDAD",
+        "ASISTENCIA",
+        "COMUNICACIÓN %",
+        "HABILIDADES COMUNICATIVAS %",
+        "MATEMÁTICA %",
+        "CIENCIA, TECNOLOGÍA Y AMBIENTE %",
+        "TOTAL",
+        "TOTAL %",
+        "FECHA DE EXAMEN"
+    ]
+    return pd.DataFrame(columns=columnas)
+
+# Descargar plantilla
+st.subheader("📋 Descargar Plantilla")
+plantilla = crear_plantilla()
+output_plantilla = BytesIO()
+with pd.ExcelWriter(output_plantilla, engine="xlsxwriter") as writer:
+    plantilla.to_excel(writer, index=False, sheet_name="Plantilla")
+plantilla_data = output_plantilla.getvalue()
+
+st.download_button(
+    label="📥 Descargar plantilla Excel",
+    data=plantilla_data,
+    file_name="plantilla_examen_admision.xlsx",
+    mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+)
+
+st.markdown("---")
+
 
 def _to_number(value):
     """Convierte cadenas que representan porcentajes o números a float.
