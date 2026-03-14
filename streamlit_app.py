@@ -8,6 +8,17 @@ st.set_page_config(page_title="Resultados Examen de Admisión", layout="wide")
 
 st.title("📊 Resultados del Examen de Admisión")
 st.write("Sube tu archivo Excel con los datos de los estudiantes para procesar el informe de nivelación e ingresantes.")
+ 
+# Configuración de Nivelación en el Sidebar
+st.sidebar.header("abacus: Nivelación")
+umbral_nivelacion = st.sidebar.number_input(
+    "Umbral de nivelación (%)",
+    min_value=0.0,
+    max_value=100.0,
+    value=30.0,
+    step=1.0,
+    help="Los estudiantes con un puntaje menor a este valor requerirán nivelación."
+)
 
 # Función para crear plantilla
 def crear_plantilla():
@@ -115,13 +126,13 @@ if uploaded_file:
         areas_nivelacion = []
 
         if asistio == "ASISTIÓ":
-            if _to_number(row.get("COMUNICACIÓN %", 0)) < 30:
+            if _to_number(row.get("COMUNICACIÓN %", 0)) < umbral_nivelacion:
                 areas_nivelacion.append({"curso": "COMUNICACIÓN"})
-            if _to_number(row.get("HABILIDADES COMUNICATIVAS %", 0)) < 30:
+            if _to_number(row.get("HABILIDADES COMUNICATIVAS %", 0)) < umbral_nivelacion:
                 areas_nivelacion.append({"curso": "HABILIDADES COMUNICATIVAS"})
-            if _to_number(row.get("MATEMÁTICA %", 0)) < 30:
+            if _to_number(row.get("MATEMÁTICA %", 0)) < umbral_nivelacion:
                 areas_nivelacion.append({"curso": "MATEMATICA"})
-            if _to_number(row.get("CIENCIA, TECNOLOGÍA Y AMBIENTE %", 0)) < 30:
+            if _to_number(row.get("CIENCIA, TECNOLOGÍA Y AMBIENTE %", 0)) < umbral_nivelacion:
                 # Dependiendo de la carrera
                 if row.get("CARRERA", "").upper() in ["DERECHO", "CONTABILIDAD", "ADMINISTRACIÓN DE EMPRESAS"]:
                     areas_nivelacion.append({"curso": "CIENCIAS SOCIALES"})
