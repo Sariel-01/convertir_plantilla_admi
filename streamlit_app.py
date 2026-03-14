@@ -115,13 +115,13 @@ if uploaded_file:
         areas_nivelacion = []
 
         if asistio == "ASISTIÓ":
-            if _to_number(row.get("COMUNICACIÓN %", 0)) <= 30:
+            if _to_number(row.get("COMUNICACIÓN %", 0)) < 30:
                 areas_nivelacion.append({"curso": "COMUNICACIÓN"})
-            if _to_number(row.get("HABILIDADES COMUNICATIVAS %", 0)) <= 30:
+            if _to_number(row.get("HABILIDADES COMUNICATIVAS %", 0)) < 30:
                 areas_nivelacion.append({"curso": "HABILIDADES COMUNICATIVAS"})
-            if _to_number(row.get("MATEMÁTICA %", 0)) <= 30:
+            if _to_number(row.get("MATEMÁTICA %", 0)) < 30:
                 areas_nivelacion.append({"curso": "MATEMATICA"})
-            if _to_number(row.get("CIENCIA, TECNOLOGÍA Y AMBIENTE %", 0)) <= 30:
+            if _to_number(row.get("CIENCIA, TECNOLOGÍA Y AMBIENTE %", 0)) < 30:
                 # Dependiendo de la carrera
                 if row.get("CARRERA", "").upper() in ["DERECHO", "CONTABILIDAD", "ADMINISTRACIÓN DE EMPRESAS"]:
                     areas_nivelacion.append({"curso": "CIENCIAS SOCIALES"})
